@@ -2,7 +2,7 @@
   "name": "@etereo/auth",
   "version": "0.2.16",
   "scripts": {
-    "build": "npm run clean:dist && rollup -c rollup-config.js",
+    "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
     "clean:dist": "rimraf -- bundles",
     "clean:npm": "rimraf -- node_modules && npm cache clean",
     "lint": "tslint src/**/*.ts",

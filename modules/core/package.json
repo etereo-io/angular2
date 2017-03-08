@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": false,
   "scripts": {
-    "build": "npm run clean:dist && rollup -c rollup-config.js",
+    "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
     "clean:dist": "rimraf -- bundles",
     "clean:npm": "rimraf -- node_modules && npm cache clean",
     "lint": "tslint src/**/*.ts",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "git@github.com:etereo-io/angular2-core.git/issues"
   },
-  "main": "./bundles/core.js",
+  "main": "./bundles/index.js",
   "dependencies": {
     "rxjs": "^5.0.1",
     "@angular/common": "2.4.5",
