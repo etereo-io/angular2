@@ -1,6 +1,6 @@
 {
   "name": "@etereo/core",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": false,
   "scripts": {
     "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
