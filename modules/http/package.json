@@ -1,0 +1,62 @@
+{
+  "name": "@etereo/http",
+  "version": "0.3.47",
+  "scripts": {
+    "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
+    "clean:dist": "rimraf -- bundles",
+    "clean:npm": "rimraf -- node_modules && npm cache clean",
+    "lint": "tslint src/**/*.ts",
+    "test": "tsc && karma start",
+    "tsc": "tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etereo-io/angular2-http"
+  },
+  "author": {
+    "name": "Daniel García",
+    "email": "daniel@etereo.io"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/etereo-io/angular2-http/issues"
+  },
+  "main": "./bundles/index.js",
+  "peerDependencies": {
+    "rxjs": "^5.0.1",
+    "@angular/common": "2.4.8",
+    "@angular/core": "2.4.8",
+    "@angular/http": "2.4.8",
+    "lodash": "^4.17.2"
+  },
+  "devDependencies": {
+    "@angular/common": "2.4.5",
+    "@angular/compiler": "2.4.5",
+    "@angular/compiler-cli": "2.4.5",
+    "@angular/core": "2.4.5",
+    "@angular/platform-browser": "2.4.5",
+    "@angular/platform-server": "2.4.5",
+    "@angularclass/hmr-loader": "^3.0.2",
+    "@types/lodash": "^4.14.43",
+    "codelyzer": "^0.0.28",
+    "jsonfile": "^2.4.0",
+    "ngm": "0.0.1",
+    "node-sass": "^3.11.1",
+    "rimraf": "2.5.2",
+    "rollup": "^0.41.4",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rxjs": "^5.0.1",
+    "tslint": "^3.15.1",
+    "typescript": "2.1.6",
+    "zone.js": "0.7.2"
+  },
+  "engines": {
+    "node": ">= 6.9.1"
+  }
+}

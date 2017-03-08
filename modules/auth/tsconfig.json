@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "./bundles"
+  },
+  "files": [
+    "./index.ts",
+    "./src/directives/auth.base.directive.ts",
+    "./src/directives/if-auth.directive.ts",
+    "./src/directives/if-unauth.directive.ts",
+    "./src/guards/auth.guard.ts",
+    "./src/guards/unauth.guard.ts",
+    "./src/models/auth.endpoints.ts",
+    "./src/models/user.interface.ts",
+    "./src/services/auth.interface.service.ts",
+    "./src/services/auth.service.ts"
+  ],
+  "angularCompilerOptions": {
+   "genDir": "./bundles",
+   "skipMetadataEmit" : false
+ }
+}
