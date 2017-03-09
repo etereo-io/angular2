@@ -5,8 +5,8 @@
 /.protractor
 
 /dist
-/bundles
 /aot
+/bundles
 
 .idea
 .DS_Store
