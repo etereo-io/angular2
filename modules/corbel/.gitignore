@@ -1,0 +1,15 @@
+/node_modules
+/coverage
+/typings
+/.karma
+/.protractor
+
+/dist
+/aot
+/bundles
+
+.idea
+.DS_Store
+
+npm-debug.log
+settings.json

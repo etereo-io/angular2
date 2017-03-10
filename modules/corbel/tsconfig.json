@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "./bundles"
+  },
+  "typeRoots": [
+    "node_modules/@types",
+    "types"
+  ],
+  "files": [
+    "index.ts",
+    "types/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "bundles"
+  ],
+  "angularCompilerOptions": {
+   "genDir": "aot",
+   "skipMetadataEmit" : true
+ }
+}
