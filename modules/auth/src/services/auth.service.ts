@@ -4,29 +4,22 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 
-import { HttpService } from '@etereo/http'; // TODO: Change for @etereo/HTTP
-
-import { IAuthService } from './auth.interface.service';
+import { AuthConnectorService } from './auth-connector.service';
 import { User } from '../models/user.interface';
-import { AuthEndpoints } from '../models/auth.endpoints';
-
-import 'rxjs/add/operator/map';
 
 @Injectable()
-export class AuthService implements IAuthService<User> {
+export class AuthService {
   private logged: boolean;
   private userSubject = new BehaviorSubject<User>(null);
   private user: User;
 
   public user$ = this.userSubject.asObservable();
 
-  constructor (private http: HttpService, private endpoints: AuthEndpoints) {}
+  constructor (private conn: AuthConnectorService<User>) {}
 
   register (user: User) {
-    let observable = this.http
+    let observable = this.conn.register(user);
     
-    .post(this.endpoints.REGISTER, user);
-
     observable.subscribe((usr: any) => {
       if (usr && usr.id) {
         this.loginSuccess(usr);
@@ -37,9 +30,7 @@ export class AuthService implements IAuthService<User> {
   }
 
   login (user: User) {
-    let observable = 
-    this.http
-    .post(this.endpoints.LOGIN, user);
+    let observable = this.conn.login(user);
 
     observable
     .subscribe((usr: User) => {
@@ -50,9 +41,7 @@ export class AuthService implements IAuthService<User> {
   }
 
   logout () {
-    let observable = 
-    this.http
-    .post('logout', {});
+    let observable = this.conn.logout();
 
     observable
     .subscribe(() => {
