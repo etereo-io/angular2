@@ -1,6 +1,6 @@
 {
   "name": "@etereo/auth",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "scripts": {
     "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
     "clean:dist": "rimraf -- bundles",
@@ -26,7 +26,7 @@
   },
   "main": "./bundles/index.js",
   "peerDependencies": {
-    "@etereo/http": "^0.3.0",
+    "@etereo/http": "^0.4.0",
     "@etereo/core": "^0.1.0",
     "@angular/common": "2.4.8",
     "@angular/core": "2.4.8",
