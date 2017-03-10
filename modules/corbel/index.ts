@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { CorbelConfig } from './src/models/corbel-config.model';
 import { CorbelService } from './src/services/corbel.service';
-import { AuthModule } from '@etereo/auth';
+import { CorbelAuthConnectorService } from './src/services/corbel-auth-connector.service';
 
 @NgModule({
   declarations: [
   ],
   imports: [
-    AuthModule
   ],
   exports: [
   ]
@@ -25,9 +24,13 @@ export class CorbelModule {
       ngModule: CorbelModule,
       providers: [
         CorbelService,
+        CorbelAuthConnectorService,
         corbelConfig ? { provide: CorbelConfig, useValue: corbelConfig } : CorbelConfig
       ]
     };
   }
 }
 
+export * from './src/models/corbel-config.model';
+export * from './src/services/corbel.service';
+export * from './src/services/corbel-auth-connector.service';

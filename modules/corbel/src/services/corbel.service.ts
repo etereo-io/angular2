@@ -6,10 +6,10 @@ import { CorbelConfig } from '../models/corbel-config.model';
 
 @Injectable()
 export class CorbelService {
-  corbel: CorbelDriver;
+  driver: CorbelDriver;
 
   constructor (config: CorbelConfig) {
-    this.corbel = corbel.getDriver(config);
+    this.driver = corbel.getDriver(config);
   }
 
 }
