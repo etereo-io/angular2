@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
+import { NgModule, ModuleWithProviders, Optional, SkipSelf, Provider } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@etereo/http';
@@ -57,7 +57,7 @@ export class AuthModule {
       // This prevent the module to be instantiated twice by the user
       throwIfAlreadyLoaded(parentModule, 'AuthModule');
     }
-    static forRoot(endpoints?: AuthEndpoints, authConnector?: AuthConnectorService<User>): ModuleWithProviders {
+    static forRoot(endpoints?: AuthEndpoints, authConnectorProvider?: Provider): ModuleWithProviders {
       let providers: Array<any> = [AuthService];
 
       if (endpoints) providers.push();
@@ -67,7 +67,7 @@ export class AuthModule {
         providers: [
           AuthService,
           endpoints ? { provide: AuthEndpoints, useValue: endpoints } : AuthEndpoints,
-          authConnector ? { provide: AuthConnectorService, useValue: authConnector } : AuthConnectorService
+          authConnectorProvider ? authConnectorProvider : AuthConnectorService
         ]
       };
     }
