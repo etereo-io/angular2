@@ -1,4 +1,4 @@
- import { Injectable, Injector } from '@angular/core';
+ import { Injectable, ReflectiveInjector } from '@angular/core';
 
 import * as corbel from 'corbel-js';
 
@@ -13,9 +13,12 @@ export class CorbelService {
   resource: CorbelResourceService;
   collection: CorbelCollectionService;
 
-  constructor (config: CorbelConfig) {
+  constructor (config: CorbelConfig, private reflect: ReflectiveInjector) {
     this.driver = corbel.getDriver(config);
-    this.resource = new CorbelResourceService(this.driver);
-    this.collection = new CorbelCollectionService(this.driver);
+    
+    ReflectiveInjector.resolve([{ provide: 'corbelDriver', useValue: this.driver }]);
+
+    this.resource = reflect.get(CorbelResourceService);
+    this.collection = reflect.get(CorbelCollectionService);
   }
 }

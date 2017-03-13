@@ -9,9 +9,7 @@ import { CacheDataService } from '../cache-data.service';
 import * as corbel from 'corbel-js';
 
 export class CorbelResourceService {
-  driver: CorbelDriver;
-
-  constructor (driver: CorbelDriver, @Inject(CacheDataService) private cache: CacheDataService) {
+  constructor (private driver: CorbelDriver, private cache: CacheDataService) {
     this.driver = driver;
   }
 

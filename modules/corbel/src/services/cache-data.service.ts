@@ -3,11 +3,13 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 
+export const CACHE_TIME: string = 'CACHE_TIME_TOKEN';
+
 @Injectable()
 export class CacheDataService {
   private queries: Object = {};
 
-  constructor (@Inject('CACHETIME') private cacheTime: number = 5000 * 60) {}
+  constructor (@Inject(CACHE_TIME) private cacheTime: number) {}
 
   checkCache(id: string): boolean {
     if (this.queries[id] && (moment(this.queries[id].timestamp).add(this.cacheTime, 'ms').isSameOrBefore())) {
