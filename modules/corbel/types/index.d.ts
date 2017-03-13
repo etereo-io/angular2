@@ -5,6 +5,7 @@ declare module 'corbel-js';
 
 declare class corbel {
   public getDriver(config: Object): CorbelDriver;
+  static CorbelDriver: CorbelDriver;
 }
 
 declare class CorbelDriver {
@@ -141,7 +142,7 @@ declare class Resources {
   static create (driver: CorbelDriver): Resources;
 }
 
-declare class Resource {
+declare class Resource extends BaseResource {
   constructor (type: string, id: string, driver: CorbelDriver, params: Object);
 
   public get(options: Object): Promise<any>;
@@ -150,7 +151,7 @@ declare class Resource {
   public delete(options: Object): Promise<any>;
 }
 
-declare class Collection {
+declare class Collection extends BaseResource {
   constructor (type: string, driver: CorbelDriver, params: Object);
 
   public get(options: Object): Promise<any>;
@@ -159,7 +160,7 @@ declare class Collection {
   public delete(options: Object): Promise<any>;
 }
 
-declare class Relation {
+declare class Relation extends BaseResource {
   constructor (srcType: string, srcId: string, destType: string, driver: CorbelDriver, params: Object);
 
   public get(destId: string, options: Object): Promise<any>;
@@ -167,6 +168,17 @@ declare class Relation {
   public move(destId: string, pos: number, options: Object): Promise<any>;
   public delete(destId: string, options: Object): Promise<any>;
   public addAnonymous(relationData: Object, options: Object): Promise<any>;
+}
+
+declare class BaseResource {
+
+  buildUri (srcType: string, srcId?: string, destType?: string, destId?: string): string;
+
+  request(args: Object): Promise<any>;
+
+  getURL(params: Object): String;
+
+  getDefaultOptions(options: Object): Object;
 }
 
 declare class Assets {
