@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import * as corbel from 'corbel-js';
+import { corbel, CorbelDriver, Resource } from 'corbel-js';
 
 import { CacheDataService } from '../cache-data.service';
 
