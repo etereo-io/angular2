@@ -1,4 +1,4 @@
-import { Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
@@ -7,7 +7,7 @@ import * as corbel from 'corbel-js';
 
 import { CacheDataService } from '../cache-data.service';
 
-
+@Injectable()
 export class CorbelCollectionService {
   constructor (private driver: CorbelDriver, private cache: CacheDataService) {
     this.driver = driver;
