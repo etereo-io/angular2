@@ -10,7 +10,7 @@ import * as corbel from 'corbel-js';
 
 @Injectable()
 export class CorbelResourceService {
-  constructor (@Inject('CorbelDriver') private driver: CorbelDriver, private cache: CacheDataService) {
+  constructor (@Inject('CorbelDriver') private driver: any, private cache: CacheDataService) {
     this.driver = driver;
   }
 
