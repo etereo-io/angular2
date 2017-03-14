@@ -8,6 +8,9 @@ import { CorbelCollectionService } from './src/services/resources/collection.ser
 import { CorbelResourceService } from './src/services/resources/resource.service';
 import { CACHE_TIME } from './src/services/cache-data.service';
 
+import * as corbel from 'corbel-js';
+
+
 @NgModule({
   declarations: [
   ],
@@ -32,8 +35,9 @@ export class CorbelModule {
         CorbelService,
         CorbelAuthConnectorService,
         CorbelResourceService,
+        { provide: 'CorbelDriver', useValue: new corbel.getDriver(corbelConfig)},
         CorbelCollectionService,
-        corbelConfig ? { provide: CorbelConfig, useValue: corbelConfig } : CorbelConfig,
+        // corbelConfig ? { provide: CorbelConfig, useValue: corbelConfig } : CorbelConfig,
         { provide: CACHE_TIME, useValue: cacheTime}
       ]
     };
