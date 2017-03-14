@@ -16,7 +16,7 @@ export class CorbelService {
   constructor (config: CorbelConfig, private injector: Injector) {
     this.driver = corbel.getDriver(config);
     
-    ReflectiveInjector.resolve([{ provide: CorbelDriver, useValue: this.driver }]);
+    ReflectiveInjector.resolve([{ provide: 'CorbelDriver', useValue: this.driver }]);
 
     let reflector: ReflectiveInjector = <ReflectiveInjector>injector;
 
