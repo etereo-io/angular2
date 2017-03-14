@@ -7,6 +7,7 @@ import { CorbelAuthConnectorService } from './src/services/corbel-auth-connector
 import { CorbelCollectionService } from './src/services/resources/collection.service';
 import { CorbelResourceService } from './src/services/resources/resource.service';
 import { CACHE_TIME } from './src/services/cache-data.service';
+import { CacheDataService } from './src/services/cache-data.service';
 
 import * as corbel from 'corbel-js';
 
@@ -35,6 +36,7 @@ export class CorbelModule {
         CorbelService,
         CorbelAuthConnectorService,
         CorbelResourceService,
+        CacheDataService,
         { provide: 'CorbelDriver', useValue: new corbel.getDriver(corbelConfig)},
         CorbelCollectionService,
         // corbelConfig ? { provide: CorbelConfig, useValue: corbelConfig } : CorbelConfig,
