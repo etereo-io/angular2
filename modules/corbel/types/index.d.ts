@@ -1,12 +1,10 @@
 // Type definitions for core-js.js
 // Project: https://github.com/bq/corbel-js
 // Definitions by: Daniel García <https://github.com/danigar>
-declare module 'corbel-js' {
+declare module 'corbel-js';
 
-  export class corbel {
-    static getDriver(config: Object): CorbelDriver;
-  }
-   
+declare class corbel {
+  static getDriver(config: Object): CorbelDriver;
 }
 
 declare class CorbelDriver {
