@@ -58,9 +58,6 @@ export class AuthModule {
       throwIfAlreadyLoaded(parentModule, 'AuthModule');
     }
     static forRoot(endpoints?: AuthEndpoints, authConnectorProvider?: Provider): ModuleWithProviders {
-      let providers: Array<any> = [AuthService];
-
-      if (endpoints) providers.push();
 
       return {
         ngModule: AuthModule,

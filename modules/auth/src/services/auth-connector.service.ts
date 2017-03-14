@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -6,6 +8,7 @@ import { HttpService } from '@etereo/http';
 
 import { AuthEndpoints } from '../models/auth.endpoints';
 
+@Injectable()
 export class AuthConnectorService<U> implements IAuthConnectorService<U> {
   constructor (private http: HttpService, private endpoints: AuthEndpoints) {}
   
