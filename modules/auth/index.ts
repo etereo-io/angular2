@@ -53,8 +53,8 @@ import { throwIfAlreadyLoaded } from '@etereo/core'; //extract as a
 })
 
 class AuthProviderObject {
-  endpoints?: AuthEndpoints;
-  authConnectorProvider?: Provider;
+  endpoints?: any;
+  authConnectorProvider?: any;
 }
 
 export class AuthModule {
