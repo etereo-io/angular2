@@ -2,8 +2,13 @@
 
 Angular2 module to manage basic authentication. It provide methods to register and authenticate the user in your backend. As it is customizable you can change the underlayer service for your backend strategy. Although the provided communication service uses the @etereo/http module to achieve the register, login and logout, you can provide your own implementation. 
 
+## How to install
 
-## How to use it
+  ~~~~~
+    npm install @etereo/auth --save
+  ~~~~~
+
+## How to use
 
   To add the module you have to import it in the root module.
 
