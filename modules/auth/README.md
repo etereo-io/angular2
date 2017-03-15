@@ -1,11 +1,6 @@
-# angular2-auth
+# @etereo/auth
 
-Angular2 module to manage basic authentication.
-Angular2 module to manage basic authentication 
-Angular2 module to manage basic authentication 
-Angular2 module to manage basic authentication 
-Angular2 module to manage basic authentication 
-Angular2 module to manage basic authentication 
+Angular2 module to manage basic authentication. It provide methods to register and authenticate the user in your backend. As it is customizable you can change the underlayer service for your backend strategy. Although the provided communication service uses the @etereo/http module to achieve the register, login and logout, you can provide your own implementation. 
 
 
 ## How to use it
@@ -27,7 +22,8 @@ Angular2 module to manage basic authentication
     // Modules
     imports: [
       BrowserModule,
-      AuthModule.forRoot(),
+      HttpModule.forRoot({baseUrl: 'http://yourappurlbase.com/' }), // Default used by Auth module
+      AuthModule.forRoot()
     ]
   })
   export class AppModule {}
@@ -135,12 +131,13 @@ import { AuthGuard } from '@etereo/auth';
   export class AppModule {}
   ~~~~~
 
-  In the other hand, if you don't need a custom implementation of the auth communication service you can provide only your backend endpoints to the module.
+  In the other hand, if you don't need a custom implementation of the auth communication service you can provide only your backend endpoints to the module. They will be used with the **@etereo/http** module to compose the api urls.
 
   ~~~~~
   @NgModule({
     imports: [
-          AuthModule.forRoot({ endpoints: { REGISTER: 'custom/register', LOGIN: 'custom/login, LOGOUT: 'custom/logout' }}),
+          HttpModule.forRoot({baseUrl: 'http://yourappurlbase.com' }),
+          AuthModule.forRoot({ endpoints: { REGISTER: 'custom/register', LOGIN: 'custom/login, LOGOUT: 'custom/logout' }}), // register endpoint: http://yourappurlbase.com/custom/register
     ]
   })
   export class AppModule {}
