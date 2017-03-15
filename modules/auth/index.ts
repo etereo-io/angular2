@@ -52,19 +52,23 @@ import { throwIfAlreadyLoaded } from '@etereo/core'; //extract as a
   ]
 })
 
+class AuthProviderObject {
+  endpoints?: AuthEndpoints;
+  authConnectorProvider?: Provider;
+}
+
 export class AuthModule {
     constructor( @Optional() @SkipSelf() parentModule: AuthModule) {
       // This prevent the module to be instantiated twice by the user
       throwIfAlreadyLoaded(parentModule, 'AuthModule');
     }
-    static forRoot(endpoints?: AuthEndpoints, authConnectorProvider?: Provider): ModuleWithProviders {
-
+    static forRoot(authProviderObject: AuthProviderObject = {}): ModuleWithProviders {
       return {
         ngModule: AuthModule,
         providers: [
           AuthService,
-          endpoints ? { provide: AuthEndpoints, useValue: endpoints } : AuthEndpoints,
-          authConnectorProvider ? authConnectorProvider : AuthConnectorService
+          authProviderObject.endpoints ? { provide: AuthEndpoints, useValue: authProviderObject.endpoints } : AuthEndpoints,
+          authProviderObject.authConnectorProvider ? authProviderObject.authConnectorProvider : AuthConnectorService
         ]
       };
     }
