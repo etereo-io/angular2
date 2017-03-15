@@ -118,10 +118,36 @@ import { AuthGuard } from '@etereo/auth';
       .post('logout', {});
     }
   }
-  ~~~~
-
+  ~~~~~~
 
 ## Module configuration
+  
+  If you desire add your own implementation of the backend communication service, you have to provide the implementation to the AuthModule in the application's root module.
+
+  ~~~~~
+  @NgModule({
+    // Modules
+    imports: [
+      BrowserModule,
+      AuthModule.forRoot({ authConnectorProvider: { provide: AuthConnectorService, useClass: YourImplementationOfAuthConnectorService } }),
+    ]
+  })
+  export class AppModule {}
+  ~~~~~
+
+  In the other hand, if you don't need a custom implementation of the auth communication service you can provide only your backend endpoints to the module.
+
+  ~~~~~
+  @NgModule({
+    imports: [
+          AuthModule.forRoot({ endpoints: { REGISTER: 'custom/register', LOGIN: 'custom/login, LOGOUT: 'custom/logout' }}),
+    ]
+  })
+  export class AppModule {}
+  ~~~~~
 
 
 ## Contrib
+
+  To compile the project you only need to run `npm run build`.
+
