@@ -24,6 +24,10 @@ export * from './src/services/auth.service';
 
 import { throwIfAlreadyLoaded } from '@etereo/core'; //extract as a 
 
+class AuthProviderObject {
+  endpoints?: AuthEndpoints;
+  authConnectorProvider?: Provider;
+}
 
 @NgModule({
   
@@ -51,11 +55,6 @@ import { throwIfAlreadyLoaded } from '@etereo/core'; //extract as a
     IfUnauthDirective
   ]
 })
-
-class AuthProviderObject {
-  endpoints?: any;
-  authConnectorProvider?: any;
-}
 
 export class AuthModule {
     constructor( @Optional() @SkipSelf() parentModule: AuthModule) {
