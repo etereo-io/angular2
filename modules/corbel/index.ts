@@ -25,7 +25,7 @@ export class CorbelModule {
 
   constructor(){}
   
-  static forRoot(corbelConfig?: CorbelConfig, cacheTime?: number): ModuleWithProviders {
+  static forRoot(corbelConfig: CorbelConfig, cacheTime?: number): ModuleWithProviders {
     if (!cacheTime) {
       cacheTime = 5000 * 60;  
     }
