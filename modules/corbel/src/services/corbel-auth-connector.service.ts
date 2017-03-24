@@ -5,25 +5,27 @@ import { Observer } from 'rxjs/Observer';
 
 import { IAuthConnectorService } from '@etereo/auth';
 import { User } from '@etereo/auth';
+
+import { Credentials } from '../models/credentials.model';
 import { CorbelService } from './corbel.service';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class CorbelAuthConnectorService implements IAuthConnectorService<User>{
+export class CorbelAuthConnectorService implements IAuthConnectorService<User, Credentials>{
   constructor (private corbel: CorbelService) {}
 
   register (user: User) {
     return Observable.create((observer: Observer<any>) => {
       this.corbel.driver.iam.users().create(user)
-      .then(()=>{
+      .then((user: User)=>{
         observer.next(user);
         observer.complete();
       });
     });
   }
 
-  login (user: User) {
+  login (user: User): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       this.corbel.driver.iam.token().create({
         claims: {
@@ -31,8 +33,8 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User>{
           'basic_auth.password': user.password
         }
       })
-      .then((data: any)=>{
-        observer.next(data);
+      .then((payload: any)=>{
+        observer.next(payload.data);
         observer.complete();
       });
     });
@@ -43,11 +45,12 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User>{
     });
   }
 
-  me () {
+  me (): Observable<User> {
     return Observable.create((observer: Observer<any>) => {
       this.corbel.driver.iam.user('me')
-      .then((data: any)=>{
-        observer.next(data);
+      .get()
+      .then((payload: any)=>{
+        observer.next(payload.data);
         observer.complete();
       });
     });

@@ -1,6 +1,6 @@
 {
   "name": "@etereo/corbel",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Angular2 library",
   "keywords": [
     "angular"
@@ -36,7 +36,7 @@
     "@angular/core": "2.4.8",
     "@angular/router": "3.4.8",
     "@angular/http": "2.4.8",
-    "@etereo/auth": "^0.5.0",
+    "@etereo/auth": "^0.6.0",
     "@etereo/http": "^0.4.0",
     "@etereo/core": "^0.1.0",
     "lodash": "^4.17.2"

@@ -12,5 +12,6 @@ export class CorbelService {
   
   constructor (@Inject('CorbelDriver') driver: any, private resource: CorbelResourceService, private collection: CorbelCollectionService) {
     this.driver = driver;
+    console.log('Hello!! I am corbel service');
   }
 }
