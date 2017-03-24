@@ -18,6 +18,7 @@ export * from './src/guards/auth.guard';
 export * from './src/guards/unauth.guard';
 export * from './src/models/auth.endpoints';
 export * from './src/models/user.interface';
+export * from './src/models/credentials.interface';
 export * from './src/services/auth-connector.interface.service';
 export * from './src/services/auth-connector.service';
 export * from './src/services/auth.service';

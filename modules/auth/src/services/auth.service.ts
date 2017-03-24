@@ -2,20 +2,24 @@ import { Injectable, Optional, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 import * as _ from 'lodash';
 
 import { AuthConnectorService } from './auth-connector.service';
 import { User } from '../models/user.interface';
+import { Credentials } from '../models/credentials.interface';
+
 
 @Injectable()
 export class AuthService {
   private logged: boolean;
   private userSubject = new BehaviorSubject<User>(null);
   private user: User;
+  private credentials: Credentials;
 
   public user$ = this.userSubject.asObservable();
 
-  constructor (private conn: AuthConnectorService<User>) {}
+  constructor (private conn: AuthConnectorService<User, Credentials>) {}
 
   register (user: User) {
     let observable = this.conn.register(user);
@@ -30,14 +34,10 @@ export class AuthService {
   }
 
   login (user: User) {
-    let observable = this.conn.login(user);
-
-    observable
-    .subscribe((usr: User) => {
-      this.loginSuccess(usr);
+    return this.conn.login(user)
+    .switchMap((credentials: Credentials) => {
+      return this.loginSuccess(credentials);
     });
-
-    return observable;
   }
 
   logout () {
@@ -57,18 +57,32 @@ export class AuthService {
   }
 
   getUser (): User {
-    return this.user;
+    if (this.isAuth) {
+      return this.user;
+    }
   }
 
-  private loginSuccess (user: User) {
-    this.user = user;
+  getCredentials (): Credentials {
+    return this.credentials;
+  }
+
+  private loginSuccess (credentials: Credentials): Observable<User> {
+    this.credentials = credentials;
     this.logged = true;
-    this.userSubject.next(user);
+
+    let observable = this.conn.me();
+
+    observable.subscribe((user: User) => {
+      this.userSubject.next(user);
+    });
+
+    return observable;
   }
 
   private logOutSuccess (user: User) {
     this.user = null;
     this.logged = false;
+    this.credentials = null;
     this.userSubject.next(null);
   }
 }

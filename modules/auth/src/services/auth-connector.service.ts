@@ -9,7 +9,7 @@ import { HttpService } from '@etereo/http';
 import { AuthEndpoints } from '../models/auth.endpoints';
 
 @Injectable()
-export class AuthConnectorService<U> implements IAuthConnectorService<U> {
+export class AuthConnectorService<U, C> implements IAuthConnectorService<U, C> {
   constructor (private http: HttpService, private endpoints: AuthEndpoints) {}
   
   register(user: U): Observable<U> {
@@ -17,7 +17,7 @@ export class AuthConnectorService<U> implements IAuthConnectorService<U> {
     .post(this.endpoints.REGISTER, user);
   }
 
-  login (user: U): Observable<U> {
+  login (user: U): Observable<C> {
     return this.http
     .post(this.endpoints.LOGIN, user);
   }
