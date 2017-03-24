@@ -5,16 +5,19 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as _ from 'lodash';
 
+import { SessionStorage } from '@etereo/core';
+
 import { AuthConnectorService } from './auth-connector.service';
 import { User } from '../models/user.interface';
 import { Credentials } from '../models/credentials.interface';
-
 
 @Injectable()
 export class AuthService {
   private logged: boolean;
   private userSubject = new BehaviorSubject<User>(null);
   private user: User;
+
+  @SessionStorage()
   private credentials: Credentials;
 
   public user$ = this.userSubject.asObservable();
