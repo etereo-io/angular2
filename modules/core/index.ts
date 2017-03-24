@@ -1,6 +1,7 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 
 export * from './src/guards/module-import.guard';
+export * from './src/decorators/session-storage.decorator';
 
 @NgModule({
   imports: [
