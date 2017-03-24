@@ -24,6 +24,11 @@ export class AuthConnectorService<U> implements IAuthConnectorService<U> {
 
   logout (): Observable<any> {
     return this.http
-    .post('logout', {});
+    .post(this.endpoints.LOGOUT, {});
+  }
+
+  me (): Observable<any> {
+    return this.http
+    .get(this.endpoints.ME);
   }
 }

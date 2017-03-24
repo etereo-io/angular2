@@ -5,4 +5,5 @@ export class AuthEndpoints {
   REGISTER = 'signup';
   LOGIN = 'login';
   LOGOUT = 'logout';
+  ME = 'me';
 }
