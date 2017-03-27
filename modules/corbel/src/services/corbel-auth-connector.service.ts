@@ -53,8 +53,8 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User, C
     return Observable.create((observer: Observer<any>) => {
       this.corbel.driver.iam.user('me')
       .get()
-      .then((payload: any)=>{
-        observer.next(payload.data);
+      .then((usr: User)=>{
+        observer.next(usr);
         observer.complete();
       });
     });
