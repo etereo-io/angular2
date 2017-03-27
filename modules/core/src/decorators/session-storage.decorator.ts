@@ -3,12 +3,14 @@ let curValue: any = null;
 export function SessionStorage (propertyName?: string): any{
 
   return function (target: any, name: string) {
-
+     
       const key = propertyName || name;
+
+      let prop = target[key];
 
       const getter = function () {
         if (curValue ===  null) {
-          return sessionStorage.getItem(key);
+          return deserializeData(sessionStorage.getItem(key));
         }
         else {
           return curValue;
@@ -16,18 +18,42 @@ export function SessionStorage (propertyName?: string): any{
       }
 
       const setter = function (value: any) {
+        let serialized;
+
         if (value !== null) {
-          sessionStorage.setItem(key, value);
+          if (typeof value === 'object') {
+            serialized = JSON.stringify(value);
+          }
+          else {
+            serialized = value;
+          }
+          
+          sessionStorage.setItem(key, serialized);
         }
         else {
           sessionStorage.removeItem(key);
         }
+        
         curValue = value;
-        setter.apply(this, value);
+        prop = value;
+      }
+
+      const deserializeData = function (data: any) {
+        let serialized;
+
+        if (data) {
+          try {
+            serialized = JSON.parse(data);
+          }
+          catch (e) {
+            serialized = data;
+          }
+
+          return serialized;
+        }
       }
 
       return Object.defineProperty(target, name, {
-        value: sessionStorage.getItem(key),
         get: getter,
         set: setter,
         enumerable: true,
