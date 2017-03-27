@@ -5,5 +5,5 @@ export interface IAuthConnectorService<U, C> {
   register(user: U): Observable<U>;
   login (user: U): Observable<C>;
   logout (): Observable<any>; 
-  me (): Observable<U>;
+  me (credentials?: C): Observable<U>;
 }

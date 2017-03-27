@@ -27,7 +27,7 @@ export class AuthConnectorService<U, C> implements IAuthConnectorService<U, C> {
     .post(this.endpoints.LOGOUT, {});
   }
 
-  me (): Observable<any> {
+  me (credentials?: C): Observable<any> {
     return this.http
     .get(this.endpoints.ME);
   }

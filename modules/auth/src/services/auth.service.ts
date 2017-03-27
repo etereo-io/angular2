@@ -22,7 +22,15 @@ export class AuthService {
 
   public user$ = this.userSubject.asObservable();
 
-  constructor (private conn: AuthConnectorService<User, Credentials>) {}
+  constructor (private conn: AuthConnectorService<User, Credentials>) {
+    this.conn.me(this.credentials)
+    .subscribe((usr?: User) => {
+      if (usr) {
+        this.loginSuccess(usr);
+        this.userSubject.next(usr);
+      }
+    });
+  }
 
   register (user: User) {
     let observable = this.conn.register(user);
@@ -37,10 +45,12 @@ export class AuthService {
   }
 
   login (user: User) {
-    return this.conn.login(user)
-    .switchMap((credentials: Credentials) => {
-      return this.loginSuccess(credentials);
-    });
+    if (!this.isAuth()) {
+      return this.conn.login(user)
+      .switchMap((credentials: Credentials) => {
+        return this.loginSuccess(credentials);
+      });
+    }
   }
 
   logout () {
@@ -73,7 +83,7 @@ export class AuthService {
     this.credentials = credentials;
     this.logged = true;
 
-    let observable = this.conn.me();
+    let observable = this.conn.me(this.credentials);
 
     observable.subscribe((user: User) => {
       this.userSubject.next(user);
