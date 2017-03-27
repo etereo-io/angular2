@@ -5,6 +5,7 @@ declare module 'corbel-js';
 
 declare class corbel {
   static getDriver(config: Object): CorbelDriver;
+  static IAM: Iam;
 }
 
 declare class CorbelDriver {
@@ -29,6 +30,7 @@ declare class CorbelDriver {
   public scheduler: Scheduler;
   public webfs: Webfs;
   public domain: Domain;
+
 }
 
 declare class Services {

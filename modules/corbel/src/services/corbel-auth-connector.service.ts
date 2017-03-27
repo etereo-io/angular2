@@ -45,7 +45,11 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User, C
     });
   }
 
-  me (): Observable<User> {
+  me (credentials?: Credentials): Observable<User> {
+    if (credentials) {
+      this.corbel.driver.config.set('iamToken', credentials);
+    }
+
     return Observable.create((observer: Observer<any>) => {
       this.corbel.driver.iam.user('me')
       .get()
