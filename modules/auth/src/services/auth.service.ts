@@ -23,13 +23,18 @@ export class AuthService {
   public user$ = this.userSubject.asObservable();
 
   constructor (private conn: AuthConnectorService<User, Credentials>) {
-    this.conn.me(this.credentials)
-    .subscribe((usr?: User) => {
-      if (usr) {
-        this.loginSuccess(this.credentials);
-        this.userSubject.next(usr);
-      }
-    });
+    if (this.credentials) {
+      this.conn.me(this.credentials)
+      .subscribe((usr?: User) => {
+        if (usr) {
+          this.loginSuccess(this.credentials);
+          this.userSubject.next(usr);
+        }
+      });
+    }
+    else {
+      this.userSubject.next(null);
+    }
   }
 
   register (user: User) {
