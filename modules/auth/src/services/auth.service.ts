@@ -1,6 +1,6 @@
 import { Injectable, Optional, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as _ from 'lodash';
@@ -14,7 +14,7 @@ import { Credentials } from '../models/credentials.interface';
 @Injectable()
 export class AuthService {
   private logged: boolean;
-  private userSubject = new BehaviorSubject<User>(null);
+  private userSubject = new ReplaySubject<User>();
   private user: User;
 
   @SessionStorage()
@@ -26,7 +26,7 @@ export class AuthService {
     this.conn.me(this.credentials)
     .subscribe((usr?: User) => {
       if (usr) {
-        this.loginSuccess(usr);
+        this.loginSuccess(this.credentials);
         this.userSubject.next(usr);
       }
     });
