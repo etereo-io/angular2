@@ -45,12 +45,10 @@ export class AuthService {
   }
 
   login (user: User) {
-    if (!this.isAuth()) {
-      return this.conn.login(user)
-      .switchMap((credentials: Credentials) => {
-        return this.loginSuccess(credentials);
-      });
-    }
+    return this.conn.login(user)
+    .switchMap((credentials: Credentials) => {
+      return this.loginSuccess(credentials);
+    });
   }
 
   logout () {
@@ -65,14 +63,13 @@ export class AuthService {
     return observable;
   }
 
-  isAuth (): boolean {
-    return this.logged;
+  isAuth (): Observable<boolean> {
+    return this.user$
+    .map((usr: User) => usr && !!usr.id);
   }
 
   getUser (): User {
-    if (this.isAuth) {
-      return this.user;
-    }
+    return this.user;
   }
 
   getCredentials (): Credentials {

@@ -13,13 +13,16 @@ export class UnauthGuard {
   }
 
   checkLogin () {
-    if (!this.authService.isAuth()) {
-       return true;
-    }
-    else {
-      this.router.navigate(['/']);
+    let subscription = this.authService.isAuth();
+    
+    subscription
+    .subscribe((is: boolean) => {
+      if (is) {
+        this.router.navigate(['/login']);
+      }
+    });
 
-      return false;
-    }
+    return subscription
+    .map((result: boolean) => !result);
   }
 }
