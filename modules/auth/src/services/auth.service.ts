@@ -1,6 +1,6 @@
 import { Injectable, Optional, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as _ from 'lodash';
@@ -14,40 +14,40 @@ import { Credentials } from '../models/credentials.interface';
 @Injectable()
 export class AuthService {
   private logged: boolean;
-  private userSubject = new AsyncSubject<User>();
+
+  @SessionStorage()
   private user: User;
 
   @SessionStorage()
   private credentials: Credentials;
 
+  private userSubject = new BehaviorSubject<User>(this.user);
+
   public user$ = this.userSubject.asObservable();
 
   constructor (private conn: AuthConnectorService<User, Credentials>) {
-    if (this.credentials) {
-      console.log('with credentials: ', this.credentials);
+    if (this.credentials && this.user) {
+
       this.conn.me(this.credentials)
-      .subscribe((response: any) => {
-        console.log('on subscription: ', response.data);
-        if (response && response.data && response.data.id) {
-          this.loginSuccess(this.credentials);
-          this.userSubject.next(response.data);
+      .subscribe((user: User) => {
+        if (user && user.id) {
+          this.loginMeSuccess(user);
+        }
+        else {
+          this.logOutSuccess();
         }
       });
-    }
-    else {
-      console.log('no credentials');
-      this.userSubject.next(null);
     }
   }
 
   register (user: User) {
     let observable = this.conn.register(user);
     
-    observable.subscribe((usr: any) => {
-      if (usr && usr.id) {
-        this.loginSuccess(usr);
-      }
-    });
+    // observable.subscribe((usr: any) => {
+    //   if (usr && usr.id) {
+    //     this.loginSuccess(usr);
+    //   }
+    // });
 
     return observable;
   }
@@ -55,7 +55,7 @@ export class AuthService {
   login (user: User) {
     return this.conn.login(user)
     .switchMap((credentials: Credentials) => {
-      return this.loginSuccess(credentials);
+      return this.onLogin(credentials);
     });
   }
 
@@ -73,7 +73,9 @@ export class AuthService {
 
   isAuth (): Observable<boolean> {
     return this.user$
-    .map((usr: User) => usr && !!usr.id);
+    .map((usr: User) => {
+      return usr && !!usr.id;
+    });
   }
 
   getUser (): User {
@@ -84,20 +86,25 @@ export class AuthService {
     return this.credentials;
   }
 
-  private loginSuccess (credentials: Credentials): Observable<User> {
+  private onLogin (credentials: Credentials): Observable<User> {
     this.credentials = credentials;
-    this.logged = true;
 
     let observable = this.conn.me(this.credentials);
 
     observable.subscribe((user: User) => {
-      this.userSubject.next(user);
+      this.loginMeSuccess(user);
     });
 
     return observable;
   }
 
-  private logOutSuccess (user: User) {
+  private loginMeSuccess (user: User) {
+    this.logged = true;
+    this.user = user;
+    this.userSubject.next(user);
+  }
+
+  private logOutSuccess () {
     this.user = null;
     this.logged = false;
     this.credentials = null;
