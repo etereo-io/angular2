@@ -1,3 +1,4 @@
+import { errorObject } from 'rxjs/util/errorObject';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
@@ -36,6 +37,9 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User, C
       .then((payload: any)=>{
         observer.next(payload.data);
         observer.complete();
+      })
+      .catch((error: any)=>{
+        observer.error(error);
       });
     });
   }
@@ -56,7 +60,10 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User, C
       .then((usr: User)=>{
         observer.next(usr);
         observer.complete();
-      });
+      })
+      .catch((error: any)=>{
+        observer.error(error);
+      });;
     });
   }
 }
