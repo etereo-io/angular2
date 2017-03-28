@@ -1,6 +1,6 @@
 import { Injectable, Optional, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as _ from 'lodash';
@@ -14,7 +14,7 @@ import { Credentials } from '../models/credentials.interface';
 @Injectable()
 export class AuthService {
   private logged: boolean;
-  private userSubject = new ReplaySubject<User>();
+  private userSubject = new AsyncSubject<User>();
   private user: User;
 
   @SessionStorage()
@@ -24,15 +24,18 @@ export class AuthService {
 
   constructor (private conn: AuthConnectorService<User, Credentials>) {
     if (this.credentials) {
+      console.log('with credentials: ', this.credentials);
       this.conn.me(this.credentials)
-      .subscribe((usr?: User) => {
-        if (usr) {
+      .subscribe((response: any) => {
+        console.log('on subscription: ', response.data);
+        if (response && response.data && response.data.id) {
           this.loginSuccess(this.credentials);
-          this.userSubject.next(usr);
+          this.userSubject.next(response.data);
         }
       });
     }
     else {
+      console.log('no credentials');
       this.userSubject.next(null);
     }
   }

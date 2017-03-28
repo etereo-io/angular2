@@ -18,7 +18,7 @@ export class UnauthGuard {
     subscription
     .subscribe((is: boolean) => {
       if (is) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       }
     });
 
