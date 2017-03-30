@@ -1,6 +1,4 @@
 import { Directive, TemplateRef, ViewContainerRef } from "@angular/core";
-import { isBlank } from "@angular/core/src/facade/lang";
-
 /**
  * How to use this directive?
  *
@@ -46,10 +44,10 @@ export class IfMediaDirective {
 
   private onMediaMatchChange(matches: boolean) {
     // this has been taken verbatim from NgIf implementation
-    if (matches && (isBlank(this.prevCondition) || !this.prevCondition)) {
+    if (matches && !this.prevCondition) {
       this.prevCondition = true;
       this.viewContainer.createEmbeddedView(this.templateRef);
-    } else if (!matches && (isBlank(this.prevCondition) || this.prevCondition)) {
+    } else if (!matches && this.prevCondition) {
       this.prevCondition = false;
       this.viewContainer.clear();
     }

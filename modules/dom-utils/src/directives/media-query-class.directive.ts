@@ -1,6 +1,4 @@
 import { Directive, ViewContainerRef, Input } from "@angular/core";
-import { isBlank } from "@angular/core/src/facade/lang";
-
 /**
  * Add specified classes if the provided media query selector matches
  *
@@ -70,10 +68,10 @@ export class MediaQueryClassDirective {
 
   private onMediaMatchChange(matches: boolean, data: any) {
     // this has been taken verbatim from NgIf implementation
-    if (matches && (isBlank(data.prevCondition) || !data.prevCondition)) {
+    if (matches && !data.prevCondition) {
       data.prevCondition = true;
       this.attachClasses(data.classes);
-    } else if (!matches && (isBlank(data.prevCondition) || data.prevCondition)) {
+    } else if (!matches && data.prevCondition) {
       data.prevCondition = false;
       this.removeClasses(data.classes);
     }
