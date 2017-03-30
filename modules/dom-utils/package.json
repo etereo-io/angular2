@@ -1,6 +1,6 @@
 {
-  "name": "dom-utils",
-  "version": "0.0.1",
+  "name": "@etereo/dom-utils",
+  "version": "0.1.0",
   "description": "Set of dom utilities as media query directives, some structural directives, components...",
   "keywords": [
     "angular"
@@ -28,9 +28,9 @@
   "main": "./bundles/index.js",
   "peerDependencies": {
     "rxjs": "^5.0.1",
-    "@angular/common": "2.4.8",
-    "@angular/core": "2.4.8",
-    "@angular/http": "2.4.8",
+    "@angular/common": "4.0.1",
+    "@angular/core": "4.0.1",
+    "@angular/http": "4.0.1",
     "lodash": "^4.17.2"
   },
   "devDependencies": {
