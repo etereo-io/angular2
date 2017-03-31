@@ -49,4 +49,6 @@ export class CorbelModule {
 export * from './src/services/cache-data.service';
 export * from './src/models/corbel-config.model';
 export * from './src/services/corbel.service';
+export * from './src/services/resources/resource.service';
+export * from './src/services/resources/collection.service';
 export * from './src/services/corbel-auth-connector.service';

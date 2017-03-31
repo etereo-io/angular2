@@ -9,9 +9,12 @@ import { CorbelResourceService } from './resources/resource.service';
 @Injectable()
 export class CorbelService {
   driver: any;
-  
-  constructor (@Inject('CorbelDriver') driver: any, private resource: CorbelResourceService, private collection: CorbelCollectionService) {
+  resource: CorbelResourceService;
+  collection: CorbelCollectionService;
+
+  constructor (@Inject('CorbelDriver') driver: any, resource: CorbelResourceService, collection: CorbelCollectionService) {
     this.driver = driver;
-    console.log('Hello!! I am corbel service');
+    this.resource = resource;
+    this.collection = collection;
   }
 }
