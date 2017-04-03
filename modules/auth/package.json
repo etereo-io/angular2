@@ -1,6 +1,6 @@
 {
   "name": "@etereo/auth",
-  "version": "0.6.12",
+  "version": "0.6.13",
   "scripts": {
     "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
     "clean:dist": "rimraf -- bundles",
