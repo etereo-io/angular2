@@ -13,7 +13,7 @@ export class CorbelCollectionService {
     this.driver = driver;
   }
 
-  get(collectionName: string, options: Object) {
+  get(collectionName: string, options?: Object) {
     const resource: Resource = this.driver.resources.collection(collectionName),
           id = resource.buildUri(collectionName);
 
@@ -23,7 +23,7 @@ export class CorbelCollectionService {
     else {
       let observable = Observable.create((observer: Observer<any>) => {
         resource
-        .get(options)
+        .get(options || {})
         .then((data: any) => {
           observer.next(data);
         });
@@ -34,27 +34,27 @@ export class CorbelCollectionService {
 
   }
 
-  update(collectionName: string, data: Object, options: Object) {
+  update(collectionName: string, data: Object, options?: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.collection(collectionName).update(data, options)
+      this.driver.resources.collection(collectionName).update(data, options || {})
       .then((data: any) => {
         observer.next(data);
       });
     });
   }
   
-  add(collectionName: string, data: Object, options: Object) {
+  add(collectionName: string, data: Object, options?: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.collection(collectionName).add(data, options)
+      this.driver.resources.collection(collectionName).add(data, options || {})
       .then((data: any) => {
         observer.next(data);
       });
     });
   }
 
-  delete(collectionName: string, options: Object) {
+  delete(collectionName: string, options?: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.collection(collectionName).delete(options)
+      this.driver.resources.collection(collectionName).delete(options || {})
       .then((data: any) => {
         observer.next(data);
       });

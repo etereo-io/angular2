@@ -14,7 +14,7 @@ export class CorbelResourceService {
     this.driver = driver;
   }
 
-  get(collectionName: string, resourceId: string, options: Object) {
+  get(collectionName: string, resourceId: string, options?: Object) {
     const resource: Resource = this.driver.resources.resource(collectionName, resourceId),
           id = resource.buildUri(collectionName, resourceId);
 
@@ -24,7 +24,7 @@ export class CorbelResourceService {
     else {
       let observable = Observable.create((observer: Observer<any>) => {
         resource
-        .get(options)
+        .get(options || {})
         .then((data: any) => {
           observer.next(data);
         });
@@ -35,18 +35,18 @@ export class CorbelResourceService {
 
   }
 
-  update(collectionName: string, resourceId: string, data: Object, options: Object) {
+  update(collectionName: string, resourceId: string, data: Object, options?: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.resource(collectionName, resourceId).update(data, options)
+      this.driver.resources.resource(collectionName, resourceId).update(data, options || {})
       .then((data: any) => {
         observer.next(data);
       });
     });
   }
   
-  add(collectionName: string, resourceId: string, data: Object, options: Object) {
+  add(collectionName: string, resourceId: string, data: Object, options?: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.resource(collectionName, resourceId).add(data, options)
+      this.driver.resources.resource(collectionName, resourceId).add(data, options || {})
       .then((data: any) => {
         observer.next(data);
       });
@@ -55,7 +55,7 @@ export class CorbelResourceService {
 
   delete(collectionName: string, resourceId: string, options: Object) {
     return Observable.create((observer: Observer<any>) => {
-      this.driver.resources.resource(collectionName, resourceId).delete(options)
+      this.driver.resources.resource(collectionName, resourceId).delete(options || {})
       .then((data: any) => {
         observer.next(data);
       });
