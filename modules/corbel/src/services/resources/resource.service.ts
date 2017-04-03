@@ -27,6 +27,7 @@ export class CorbelResourceService {
         .get(options || {})
         .then((response: any) => {
           observer.next(response.data);
+          observer.complete();
         })
         .catch((error: any) => {
           observer.error(error);
