@@ -26,6 +26,9 @@ export class CorbelCollectionService {
         .get(options || {})
         .then((data: any) => {
           observer.next(data);
+        })
+        .catch((error: any) => {
+          observer.error(error);
         });
       });
 
