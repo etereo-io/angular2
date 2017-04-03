@@ -36,6 +36,9 @@ export class AuthService {
         else {
           this.logOutSuccess();
         }
+      },
+      () => {
+        this.logOutSuccess();
       });
     }
   }
@@ -93,6 +96,9 @@ export class AuthService {
 
     observable.subscribe((user: User) => {
       this.loginMeSuccess(user);
+    },
+    () => {
+      this.logOutSuccess();
     });
 
     return observable;
