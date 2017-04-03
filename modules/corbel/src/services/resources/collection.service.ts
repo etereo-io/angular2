@@ -24,8 +24,8 @@ export class CorbelCollectionService {
       let observable = Observable.create((observer: Observer<any>) => {
         resource
         .get(options || {})
-        .then((data: any) => {
-          observer.next(data);
+        .then((response: any) => {
+          observer.next(response.data);
         })
         .catch((error: any) => {
           observer.error(error);
