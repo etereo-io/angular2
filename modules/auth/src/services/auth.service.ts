@@ -63,15 +63,7 @@ export class AuthService {
   }
 
   logout () {
-    let observable = this.conn.logout();
-
-    observable
-    .subscribe(() => {
-      this.logged = false;
-      this.userSubject.next(null);
-    });
-
-    return observable;
+    this.logOutSuccess();
   }
 
   isAuth (): Observable<boolean> {
