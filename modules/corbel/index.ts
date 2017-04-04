@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CorbelConfig } from './src/models/corbel-config.model';
 import { CorbelService } from './src/services/corbel.service';
+import { CorbelIamService } from './src/services/iam.service';
 import { CorbelAuthConnectorService } from './src/services/corbel-auth-connector.service';
 import { CorbelCollectionService } from './src/services/resources/collection.service';
 import { CorbelResourceService } from './src/services/resources/resource.service';
@@ -39,6 +40,7 @@ export class CorbelModule {
         CacheDataService,
         { provide: 'CorbelDriver', useValue: new corbel.getDriver(corbelConfig)},
         CorbelCollectionService,
+        CorbelIamService,
         // corbelConfig ? { provide: CorbelConfig, useValue: corbelConfig } : CorbelConfig,
         { provide: CACHE_TIME, useValue: cacheTime}
       ]
@@ -49,6 +51,7 @@ export class CorbelModule {
 export * from './src/services/cache-data.service';
 export * from './src/models/corbel-config.model';
 export * from './src/services/corbel.service';
+export * from './src/services/iam.service';
 export * from './src/services/resources/resource.service';
 export * from './src/services/resources/collection.service';
 export * from './src/services/corbel-auth-connector.service';
