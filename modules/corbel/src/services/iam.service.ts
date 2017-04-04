@@ -12,11 +12,29 @@ export class CorbelIamService {
   constructor (@Inject('CorbelDriver') private driver: any) {}
 
   getUser(userId: string) {
-    const iamUser = this.driver.iam.user(userId).get();
+    const userIam = this.driver.iam.user(userId);
 
     let observable = Observable.create((observer: Observer<any>) => {
-      iamUser
+      userIam
       .get()
+      .then((response: any) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error: any) => {
+        observer.error(error);
+      });
+    });
+
+    return observable;
+  }
+
+  getUsers (params: any) {
+    const usersIam = this.driver.iam.users();
+
+    let observable = Observable.create((observer: Observer<any>) => {
+      usersIam
+      .get(params)
       .then((response: any) => {
         observer.next(response.data);
         observer.complete();
