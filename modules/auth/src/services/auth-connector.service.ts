@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -30,5 +31,9 @@ export class AuthConnectorService<U, C> implements IAuthConnectorService<U, C> {
   me (credentials?: C): Observable<any> {
     return this.http
     .get(this.endpoints.ME);
+  }
+
+  refresh(onRefresh: (credentials: C) => void): Subscription {
+     return 
   }
 }

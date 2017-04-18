@@ -14,7 +14,7 @@ export class CorbelCollectionService {
   }
 
   get(collectionName: string, options?: Object) {
-    const resource: Resource = this.driver.resources.collection(collectionName),
+    const resource: Collection = this.driver.resources.collection(collectionName),
           id = resource.buildUri(collectionName);
 
     if (this.cache.checkCache(id)) {
@@ -43,6 +43,9 @@ export class CorbelCollectionService {
       this.driver.resources.collection(collectionName).update(data, options || {})
       .then((data: any) => {
         observer.next(data);
+      })
+      .catch((error: any) => {
+        observer.error(error);
       });
     });
   }
@@ -52,6 +55,9 @@ export class CorbelCollectionService {
       this.driver.resources.collection(collectionName).add(data, options || {})
       .then((data: any) => {
         observer.next(data);
+      })
+      .catch((error: any) => {
+        observer.error(error);
       });
     });
   }
@@ -61,6 +67,9 @@ export class CorbelCollectionService {
       this.driver.resources.collection(collectionName).delete(options || {})
       .then((data: any) => {
         observer.next(data);
+      })
+      .catch((error: any) => {
+        observer.error(error);
       });
     });
   }
