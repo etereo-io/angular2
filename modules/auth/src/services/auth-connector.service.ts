@@ -1,16 +1,18 @@
-import { Subscription } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { IAuthConnectorService } from './auth-connector.interface.service';
 import { HttpService } from '@etereo/http';
+import { Subject, Observable, Subscription } from 'rxjs/Rx';
+
+import { Credentials } from '../models/credentials.interface';
+import { IAuthConnectorService } from './auth-connector.interface.service';
 
 import { AuthEndpoints } from '../models/auth.endpoints';
 
 @Injectable()
 export class AuthConnectorService<U, C> implements IAuthConnectorService<U, C> {
+  private refreshSubject: Subject<Credentials> = new Subject(); 
+
+  public refresh$: Observable<Credentials> = this.refreshSubject.asObservable();
+
   constructor (private http: HttpService, private endpoints: AuthEndpoints) {}
   
   register(user: U): Observable<U> {
@@ -31,9 +33,5 @@ export class AuthConnectorService<U, C> implements IAuthConnectorService<U, C> {
   me (credentials?: C): Observable<any> {
     return this.http
     .get(this.endpoints.ME);
-  }
-
-  refresh(onRefresh: (credentials: C) => void): Subscription {
-     return 
   }
 }

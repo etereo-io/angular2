@@ -29,7 +29,11 @@ export class AuthService {
   private refreshSubscription: Subscription;
 
   constructor (private conn: AuthConnectorService<User, Credentials>) {
-    this.refreshSubscription = conn.refresh(this.onRefresh);
+    let self = this;
+
+    this.refreshSubscription = conn.refresh$.subscribe((credentials: Credentials) => {
+      this.onRefresh(credentials);
+    });
 
     if (this.credentials && this.user) {
 
@@ -119,9 +123,6 @@ export class AuthService {
   }
 
   private onRefresh(credentials: Credentials) {
-    console.log("credentials en auth.service ");
-    console.log(credentials);
-
     this.credentials = credentials;
   }
 }

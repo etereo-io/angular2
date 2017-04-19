@@ -1,9 +1,6 @@
-import { Subject, Subscription } from 'rxjs/Rx';
+import { Subject, Observable, Observer, Subscription } from 'rxjs/Rx';
 import { errorObject } from 'rxjs/util/errorObject';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 
 import { IAuthConnectorService } from '@etereo/auth';
 import { User } from '@etereo/auth';
@@ -16,13 +13,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CorbelAuthConnectorService implements IAuthConnectorService<User, Credentials>{
 
-  private refreshEvent$= new Subject();
+  private refreshSubject: Subject<Credentials> = new Subject(); 
+
+  public refresh$: Observable<Credentials> = this.refreshSubject.asObservable();
 
   constructor(private corbel: CorbelService) { 
-    this.corbel.driver.on('token:refresh', (event:any) => {
-      console.log("event in corbel-auth.service ");
-      console.log(event);
-      this.refreshEvent$.next(event);
+    this.corbel.driver.on('token:refresh', (event: Credentials) => {
+      this.refreshSubject.next(event);
     });
   }
 
@@ -76,10 +73,5 @@ export class CorbelAuthConnectorService implements IAuthConnectorService<User, C
         });;
     });
   }
-
-  refresh(onRefresh: (credentials: Credentials) => void): Subscription {
-    return this.refreshEvent$.subscribe(onRefresh);
-  }
-
 
 }

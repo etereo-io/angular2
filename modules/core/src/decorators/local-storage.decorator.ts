@@ -18,9 +18,6 @@ export function LocalStorage (propertyName?: string): any{
       }
 
       const setter = function (value: any) {
-
-        console.log("credentials en decorator ");
-        console.log(value);
         let serialized;
 
         if (value !== null) {
@@ -31,8 +28,6 @@ export function LocalStorage (propertyName?: string): any{
             serialized = value;
           }
           
-          console.log(key);
-          console.log(serialized);
           localStorage.setItem(key, serialized);
         }
         else {
