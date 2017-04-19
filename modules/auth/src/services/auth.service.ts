@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Injectable, Optional, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -25,7 +26,15 @@ export class AuthService {
 
   public user$ = this.userSubject.asObservable();
 
+  private refreshSubscription: Subscription;
+
   constructor (private conn: AuthConnectorService<User, Credentials>) {
+    let self = this;
+
+    this.refreshSubscription = conn.refresh$.subscribe((credentials: Credentials) => {
+      this.onRefresh(credentials);
+    });
+
     if (this.credentials && this.user) {
 
       this.conn.me(this.credentials)
@@ -41,6 +50,10 @@ export class AuthService {
         this.logOutSuccess();
       });
     }
+  }
+
+  ngOnDestroy(){
+    this.refreshSubscription.unsubscribe();
   }
 
   register (user: User) {
@@ -107,5 +120,9 @@ export class AuthService {
     this.logged = false;
     this.credentials = null;
     this.userSubject.next(null);
+  }
+
+  private onRefresh(credentials: Credentials) {
+    this.credentials = credentials;
   }
 }
