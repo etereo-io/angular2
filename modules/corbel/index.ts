@@ -55,3 +55,4 @@ export * from './src/services/iam.service';
 export * from './src/services/resources/resource.service';
 export * from './src/services/resources/collection.service';
 export * from './src/services/corbel-auth-connector.service';
+export * from './src/models/corbel-count.model';
