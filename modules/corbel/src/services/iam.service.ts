@@ -12,7 +12,7 @@ export class CorbelIamService {
   
   constructor (@Inject('CorbelDriver') private driver: any) {}
 
-  getUser(userId: string) {
+  getUser(userId: string): Observable<any> {
     const userIam = this.driver.iam.user(userId);
 
     let observable = Observable.create((observer: Observer<any>) => {
@@ -30,7 +30,7 @@ export class CorbelIamService {
     return observable;
   }
 
-  getUsers (params: any) {
+  getUsers (params: any): Observable<Array<any>> {
     const usersIam = this.driver.iam.users();
 
     let observable = Observable.create((observer: Observer<any>) => {
@@ -48,7 +48,7 @@ export class CorbelIamService {
     return observable;
   }
 
-  update (id: string, userData: any, options: any): Observable<any> {
+  update (id: string, userData: any, options?: any): Observable<any> {
     const iamUser = this.driver.iam.user(id);
 
     return Observable.create((observer: Observer<any>) => {
@@ -78,8 +78,19 @@ export class CorbelIamService {
     });
   }
 
-  delete() {
-    
+  delete (id: string, options?: any): Observable<any> {
+    const iamUser = this.driver.iam.user(id);
+
+    return Observable.create((observer: Observer<any>) => {
+      iamUser.delete(options)
+      .then((response: any) => {
+        observer.next(response);
+        observer.complete();
+      })
+      .catch((error: any) => {
+        observer.error(error);
+      });
+    });
   }
 
   availability (userName: string): Observable<boolean> {
