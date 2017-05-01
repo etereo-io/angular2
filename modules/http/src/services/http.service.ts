@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class HttpService {
 
-  constructor (private http: Http, private apiUrl: ApiUrl/*, private baseOptions: BaseReqOptions*/) {
+  constructor (private http: Http, private apiUrl: ApiUrl, private baseOptions: BaseReqOptions) {
     console.log(this.apiUrl);
     if (!this.apiUrl || !this.apiUrl.baseUrl) {
       throw new Error('You have to provide a valid api url in the application config json.');
@@ -69,7 +69,7 @@ export class HttpService {
   }
 
   _createRequestOptions (opts: any): RequestOptions {
-    return new RequestOptions(_.extend({} /*,this.baseOptions*/, opts));
+    return new RequestOptions(_.extend({} , this.baseOptions, opts));
 
   }
 
