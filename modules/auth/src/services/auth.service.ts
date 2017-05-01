@@ -76,7 +76,13 @@ export class AuthService {
   }
 
   logout () {
-    this.logOutSuccess();
+    let subscription = this.conn.logout();
+
+    subscription.subscribe(() => {
+      this.logOutSuccess();
+    });
+
+    return subscription;
   }
 
   isAuth (): Observable<boolean> {
