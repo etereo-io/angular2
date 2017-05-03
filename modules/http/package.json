@@ -1,9 +1,9 @@
 {
   "name": "@etereo/http",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "scripts": {
     "build": "npm run clean:dist && node_modules/.bin/ngc -p .",
-    "clean:dist": "rimraf -- aot",
+    "clean:dist": "rimraf -- aot && rimraf -- bundles",
     "clean:npm": "rimraf -- node_modules && npm cache clean",
     "lint": "tslint src/**/*.ts",
     "test": "tsc && karma start",
