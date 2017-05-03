@@ -2,3 +2,4 @@ node_modules
 aot
 .gitignore
 tsconfig.json
+src
