@@ -1,6 +1,6 @@
 {
   "name": "@etereo/http",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "scripts": {
     "build": "npm run clean:dist && node_modules/.bin/ngc -p .",
     "clean:dist": "rimraf -- aot && rimraf -- bundles",
