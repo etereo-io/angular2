@@ -3,3 +3,4 @@ aot
 .gitignore
 tsconfig.json
 src
+./index.ts
