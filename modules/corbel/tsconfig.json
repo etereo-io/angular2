@@ -9,7 +9,8 @@
     "lib": ["es2015", "dom"],
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./bundles"
+    "outDir": "./bundles",
+    "noEmit": false
   },
   "typeRoots": [
     "node_modules/@types",
@@ -25,6 +26,6 @@
   ],
   "angularCompilerOptions": {
    "genDir": "aot",
-   "skipMetadataEmit" : true
+   "skipMetadataEmit" : false
  }
 }
