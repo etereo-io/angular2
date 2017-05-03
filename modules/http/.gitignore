@@ -3,6 +3,7 @@
 /typings
 /.karma
 /.protractor
+/aot
 
 /dist
 /aot
