@@ -6,7 +6,7 @@ import 'rxjs/add/observable/of';
 
 import { CacheDataService } from '../cache-data.service';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 
 @Injectable()
 export class CorbelResourceService {

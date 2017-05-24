@@ -1,7 +1,7 @@
-// Type definitions for core-js.js
-// Project: https://github.com/bq/corbel-js
+// Type definitions for core-sdk-js.js
+// Project: https://github.com/corbel-platform/corbel-sdk-js
 // Definitions by: Daniel García <https://github.com/danigar>
-declare module 'corbel-js';
+declare module 'corbel-sdk-js';
 
 declare class corbel {
   static getDriver(config: Object): CorbelDriver;

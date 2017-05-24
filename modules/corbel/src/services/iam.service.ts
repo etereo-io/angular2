@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/observable/of';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 import { CorbelCount } from '../models/corbel-count.model';
 
 @Injectable()

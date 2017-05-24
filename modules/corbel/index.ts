@@ -10,7 +10,7 @@ import { CorbelResourceService } from './src/services/resources/resource.service
 import { CACHE_TIME } from './src/services/cache-data.service';
 import { CacheDataService } from './src/services/cache-data.service';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 
 
 @NgModule({
