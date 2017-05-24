@@ -27,7 +27,7 @@
   },
   "main": "./bundles/index.js",
   "dependencies": {
-    "corbel-js": "^0.6.6",
+    "corbel-sdk-js": "1.0.1",
     "moment": "^2.17.1"
   },
   "peerDependencies": {
