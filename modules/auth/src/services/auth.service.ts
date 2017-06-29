@@ -42,12 +42,6 @@ export class AuthService {
         if (user && user.id) {
           this.loginMeSuccess(user);
         }
-        else {
-          this.logOutSuccess();
-        }
-      },
-      () => {
-        this.logOutSuccess();
       });
     }
   }
