@@ -14,8 +14,12 @@ export class CorbelCollectionService {
   }
 
   get(collectionName: string, options?: Object) {
-    const resource: Collection = this.driver.resources.collection(collectionName),
-          id = resource.buildUri(collectionName);
+    const resource: Collection = this.driver.resources.collection(collectionName);
+    let id = resource.buildUri(collectionName);
+
+    if (options) {
+      id += options.toString();
+    }
 
     if (this.cache.checkCache(id)) {
       return Observable.of(this.cache.getFromCache(id));
