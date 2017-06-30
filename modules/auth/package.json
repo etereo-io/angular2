@@ -1,6 +1,6 @@
 {
   "name": "@etereo/auth",
-  "version": "0.6.18",
+  "version": "0.6.21",
   "scripts": {
     "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
     "clean:dist": "rimraf -- bundles",
@@ -54,7 +54,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^1.0.1",
-    "rxjs": "^5.0.1",
+    "rxjs": "^5.3.0",
     "tslint": "^3.15.1",
     "typescript": "2.2.1",
     "zone.js": "0.7.2"
