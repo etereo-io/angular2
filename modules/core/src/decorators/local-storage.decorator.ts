@@ -1,5 +1,3 @@
-let curValue: any = null;
-
 export function LocalStorage (propertyName?: string): any{
 
   return function (target: any, name: string) {
@@ -7,6 +5,7 @@ export function LocalStorage (propertyName?: string): any{
       const key = propertyName || name;
 
       let prop = target[key];
+      let curValue: any = null;
 
       const getter = function () {
         if (curValue ===  null) {

@@ -1,6 +1,6 @@
 {
   "name": "@etereo/core",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "scripts": {
     "build": "npm run clean:dist && node_modules/.bin/ngc -p .",
     "clean:dist": "rimraf -- bundles && rimraf -- aot",

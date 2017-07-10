@@ -38,7 +38,7 @@
     "@angular/http": "^4.0.1",
     "@etereo/auth": "0.6.17",
     "@etereo/http": "0.4.5",
-    "@etereo/core": "0.4.9",
+    "@etereo/core": "0.4.12",
     "lodash": "^4.17.2"
   },
   "devDependencies": {
