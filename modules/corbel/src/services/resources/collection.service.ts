@@ -18,7 +18,7 @@ export class CorbelCollectionService {
     let id = resource.buildUri(collectionName);
 
     if (options) {
-      id += options.toString();
+      id += JSON.stringify(options);
     }
 
     if (this.cache.checkCache(id)) {

@@ -19,9 +19,9 @@ export class CorbelResourceService {
     let id = resource.buildUri(collectionName, resourceId);
 
     if (options) {
-      id += options.toString();
+      id += JSON.stringify(options);
     }
-    
+
     if (this.cache.checkCache(id)) {
       return Observable.of(this.cache.getFromCache(id));
     }
