@@ -15,9 +15,13 @@ export class CorbelResourceService {
   }
 
   get(collectionName: string, resourceId: string, options?: Object) {
-    const resource: Resource = this.driver.resources.resource(collectionName, resourceId),
-          id = resource.buildUri(collectionName, resourceId);
+    const resource: Resource = this.driver.resources.resource(collectionName, resourceId);
+    let id = resource.buildUri(collectionName, resourceId);
 
+    if (options) {
+      id += options.toString();
+    }
+    
     if (this.cache.checkCache(id)) {
       return Observable.of(this.cache.getFromCache(id));
     }
