@@ -6,7 +6,7 @@ import 'rxjs/add/observable/of';
 
 import { CacheDataService } from '../cache-data.service';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 
 @Injectable()
 export class CorbelResourceService {
@@ -15,8 +15,12 @@ export class CorbelResourceService {
   }
 
   get(collectionName: string, resourceId: string, options?: Object) {
-    const resource: Resource = this.driver.resources.resource(collectionName, resourceId),
-          id = resource.buildUri(collectionName, resourceId);
+    const resource: Resource = this.driver.resources.resource(collectionName, resourceId);
+    let id = resource.buildUri(collectionName, resourceId);
+
+    if (options) {
+      id += JSON.stringify(options);
+    }
 
     if (this.cache.checkCache(id)) {
       return Observable.of(this.cache.getFromCache(id));

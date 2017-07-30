@@ -25,7 +25,7 @@
   "main": "./bundles/index.js",
   "peerDependencies": {
     "@etereo/http": "^0.4.0",
-    "@etereo/core": "^0.4.0",
+    "@etereo/core": "^0.4.16",
     "@angular/common": "4.0.1",
     "@angular/core": "4.0.1",
     "@angular/router": "4.0.1",
@@ -52,7 +52,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^1.0.1",
-    "rxjs": "^5.0.1",
+    "rxjs": "^5.3.0",
     "tslint": "^3.15.1",
     "typescript": "2.2.1",
     "zone.js": "0.7.2"

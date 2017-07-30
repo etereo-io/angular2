@@ -19,6 +19,7 @@
     "bundles"
   ],
   "angularCompilerOptions": {
-   "genDir": "aot"
+   "genDir": "./bundles",
+   "skipMetadataEmit" : false
  }
 }

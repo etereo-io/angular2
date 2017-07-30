@@ -1,6 +1,6 @@
 {
   "name": "@etereo/corbel",
-  "version": "0.6.4",
+  "version": "0.7.5",
   "description": "Angular2 library",
   "keywords": [
     "angular"
@@ -27,7 +27,7 @@
   },
   "main": "./bundles/index.js",
   "dependencies": {
-    "corbel-js": "^0.6.6",
+    "corbel-sdk-js": "1.0.1",
     "moment": "^2.17.1"
   },
   "peerDependencies": {
@@ -36,9 +36,9 @@
     "@angular/core": "^4.0.1",
     "@angular/router": "^4.0.1",
     "@angular/http": "^4.0.1",
-    "@etereo/auth": "0.6.17",
+    "@etereo/auth": "0.6.24",
     "@etereo/http": "0.4.5",
-    "@etereo/core": "0.4.9",
+    "@etereo/core": "0.4.16",
     "lodash": "^4.17.2"
   },
   "devDependencies": {

@@ -12,8 +12,13 @@ export class CacheDataService {
   constructor (@Inject(CACHE_TIME) private cacheTime: number) {}
 
   checkCache(id: string): boolean {
-    if (this.queries[id] && (moment(this.queries[id].timestamp).add(this.cacheTime, 'ms').isSameOrBefore())) {
-      return !!this.queries[id].data;
+    if (this.queries[id]) {
+      if (moment(this.queries[id].timestamp).add(this.cacheTime, 'ms').isSameOrAfter()) {
+        return !!this.queries[id].data;
+      } else {
+        delete this.queries[id];
+        return false;
+      }
     }
     else {
       return false;

@@ -1,5 +1,4 @@
 node_modules
-aot
-src
+
 .gitignore
 tsconfig.json

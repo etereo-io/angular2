@@ -1,6 +1,6 @@
  import { Injectable, Inject } from '@angular/core';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 
 import { CorbelConfig } from '../models/corbel-config.model';
 import { CorbelCollectionService } from './resources/collection.service';

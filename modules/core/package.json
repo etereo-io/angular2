@@ -1,8 +1,9 @@
 {
   "name": "@etereo/core",
-  "version": "0.4.11",
+  "version": "0.4.16",
   "scripts": {
-    "build": "npm run clean:dist && node_modules/.bin/ngc -p .",
+    "build": "npm run clean:dist && node_modules/.bin/tsc -p .",
+    "build:aot": "npm run clean:dist && node_modules/.bin/ngc -p .",
     "clean:dist": "rimraf -- bundles && rimraf -- aot",
     "clean:npm": "rimraf -- node_modules && npm cache clean",
     "lint": "tslint src/**/*.ts",

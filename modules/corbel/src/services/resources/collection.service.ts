@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import * as corbel from 'corbel-js';
+import * as corbel from 'corbel-sdk-js';
 
 import { CacheDataService } from '../cache-data.service';
 
@@ -14,8 +14,12 @@ export class CorbelCollectionService {
   }
 
   get(collectionName: string, options?: Object) {
-    const resource: Collection = this.driver.resources.collection(collectionName),
-          id = resource.buildUri(collectionName);
+    const resource: Collection = this.driver.resources.collection(collectionName);
+    let id = resource.buildUri(collectionName);
+
+    if (options) {
+      id += JSON.stringify(options);
+    }
 
     if (this.cache.checkCache(id)) {
       return Observable.of(this.cache.getFromCache(id));
