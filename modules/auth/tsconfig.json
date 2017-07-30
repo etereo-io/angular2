@@ -26,7 +26,6 @@
     "bundles"
   ],
   "angularCompilerOptions": {
-   "genDir": "./bundles",
-   "skipMetadataEmit" : false
+   "genDir": "./bundles"
  }
 }
