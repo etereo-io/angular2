@@ -36,13 +36,11 @@ export class AuthService {
     )
 
     if (this.credentials && this.user) {
-      this.conn.me(this.credentials, this.user).subscribe(
-        (user: User) => {
-          if (user && user.id) {
-            this.loginMeSuccess(user)
-          }
+      this.conn.me(this.credentials, this.user).subscribe((user: User) => {
+        if (user && user.id) {
+          this.loginMeSuccess(user)
         }
-      )
+      })
     }
   }
 
@@ -80,7 +78,7 @@ export class AuthService {
 
   isAuth(): Observable<boolean> {
     return this.user$.map((usr: User) => {
-      return usr && !!usr.id
+      return usr && (!!usr.id || !!usr['_id'])
     })
   }
 
