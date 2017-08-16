@@ -26,12 +26,10 @@ export class CacheDataService {
   }
 
   followRequest(id: string, observable: Observable<any>): Observable<any> {
-    let subscription = observable.subscribe((data) => {
+    return observable.map((data) => {
       this.addToCache(id, data);
-      subscription.unsubscribe();
+      return data;
     });
-    
-    return observable;
   }
 
   getFromCache(id: string) {
