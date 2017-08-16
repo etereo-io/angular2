@@ -1,9 +1,9 @@
 {
   "name": "@etereo/auth",
-  "version": "0.6.24",
+  "version": "0.7.3",
   "scripts": {
-    "build": "npm run clean:dist && ./node_modules/.bin/tsc -p .",
-    "clean:dist": "rimraf -- bundles",
+    "build": "npm run clean:dist && node_modules/.bin/ngc -p .",
+    "clean:dist": "rimraf -- bundles && rimraf -- aot",
     "clean:npm": "rimraf -- node_modules && npm cache clean",
     "lint": "tslint src/**/*.ts",
     "test": "tsc && karma start",
@@ -17,9 +17,7 @@
     "name": "Daniel García",
     "email": "daniel@etereo.io"
   },
-  "keywords": [
-    "angular"
-  ],
+  "keywords": ["angular"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/etereo-io/angular2-auth.git/issues"
@@ -28,18 +26,18 @@
   "peerDependencies": {
     "@etereo/http": "^0.4.0",
     "@etereo/core": "^0.4.16",
-    "@angular/common": "2.4.8",
-    "@angular/core": "2.4.8",
-    "@angular/router": "3.3.1",
-    "@angular/http": "2.4.8"
+    "@angular/common": "4.0.1",
+    "@angular/core": "4.0.1",
+    "@angular/router": "4.0.1",
+    "@angular/http": "4.0.1"
   },
   "devDependencies": {
-    "@angular/common": "2.4.5",
-    "@angular/compiler": "^2.4.5",
-    "@angular/compiler-cli": "^2.4.5",
-    "@angular/core": "2.4.5",
-    "@angular/platform-browser": "2.4.5",
-    "@angular/platform-server": "^2.4.5",
+    "@angular/common": "4.0.1",
+    "@angular/compiler": "4.0.1",
+    "@angular/compiler-cli": "4.0.1",
+    "@angular/core": "4.0.1",
+    "@angular/platform-browser": "4.0.1",
+    "@angular/platform-server": "4.0.1",
     "@angularclass/hmr-loader": "^3.0.2",
     "@types/core-js": "^0.9.37",
     "@types/lodash": "^4.14.57",
